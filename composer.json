@@ -1,0 +1,60 @@
+{
+    "name": "swisnl/laravel-static-request-cache",
+    "type": "library",
+    "description": "Cache static responses based on content-type to static files.",
+    "keywords": [
+        "swisnl",
+        "laravel-static-request-cache"
+    ],
+    "homepage": "https://github.com/swisnl/laravel-static-request-cache",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Björn Brala",
+            "email": "bjorn@swis.nl",
+            "homepage": "https://www.swis.nl/",
+            "role": "Lead developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/console": "^5.0,<5.6",
+        "illuminate/filesystem": "^5.0,<5.6",
+        "illuminate/http": "^5.0,<5.6",
+        "illuminate/routing": "^5.0,<5.6",
+        "illuminate/support": "^5.0,<5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=5.4.3",
+        "orchestra/testbench": "~3.0",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swis\\LaravelStaticRequestCache\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Swis\\LaravelStaticRequestCache\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Swis\\LaravelStaticRequestCache\\Provider\\CacheProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
