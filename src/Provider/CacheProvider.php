@@ -5,6 +5,7 @@ namespace Swis\LaravelStaticRequestCache\Provider;
 use Illuminate\Support\ServiceProvider;
 use Swis\LaravelStaticRequestCache\Classes\HtmlProxy;
 use Swis\LaravelStaticRequestCache\Commands\ClearStaticCache;
+use Swis\LaravelStaticRequestCache\StaticRequestCache;
 
 class CacheProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class CacheProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/static-html-cache.php', 'static-html-cache');
+
+        $this->app->singleton(StaticRequestCache::class);
 
         $this->commands([
             ClearStaticCache::class,
