@@ -108,12 +108,23 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
-    public function testNotCachableContentTypesIsNotCached()
+    public function testNonCacheableContentTypesIsNotCached()
     {
         $request = \Illuminate\Http\Request::create('', 'GET');
         $response = $this->getCacheablesResponse();
 
         $response->header('content-type', 'foo/bar');
+
+        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
+    }
+
+    public function testNonCacheableResponseHeadersAreNotCached()
+    {
+        $request = \Illuminate\Http\Request::create('', 'GET');
+        $response = $this->getCacheablesResponse();
+
+        $response->headers->set('Cache-control', 'no-store');
 
         $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
@@ -148,6 +159,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $response = new \Illuminate\Http\Response();
         $response->setStatusCode(200);
         $response->header('content-type', 'text/html');
+        $response->headers->set('Cache-control', 'public');
 
         return $response;
     }

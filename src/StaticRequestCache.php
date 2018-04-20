@@ -49,9 +49,11 @@ class StaticRequestCache
             }
         }
 
-        return $this->enabled && $response->isOk() && $isGETRequest && $hasNoParams && $isCachableMimeType;
-    }
+        // check if there are Cache-control: no-store or private headers set
+        $hasDisablingCacheHeaders = ($response->headers->hasCacheControlDirective('no-store') || $response->headers->getCacheControlDirective('private'));
 
+        return $this->enabled && $response->isOk() && !$hasDisablingCacheHeaders && $isGETRequest && $hasNoParams && $isCachableMimeType;
+    }
     /**
      * @param Request $request
      * @return mixed
