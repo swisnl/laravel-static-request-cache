@@ -17,6 +17,8 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $app['path.public'] = function () {
             return __DIR__;
         };
+
+        $app['config']->set('static-html-cache.cachable_mimetypes', ['text/html', 'application/json']);
     }
 
     public function testEnabledConfig()
@@ -54,8 +56,6 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
     public function testValidRequestIsCached()
     {
-        $this->app['config']->set('static-html-cache.cachable_mimetypes', ['text/html']);
-
         $request = \Illuminate\Http\Request::create('', 'GET');
         $response = $this->getCacheablesResponse();
 
@@ -129,7 +129,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
-    public function testItStoresResponse()
+    public function testItStoresHtmlResponseAndSavesAsIndexDotHtmlFile()
     {
         $request = \Illuminate\Http\Request::create('foo/bar', 'GET');
         $response = $this->getCacheablesResponse();
@@ -140,6 +140,23 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
             ->expects($this->once())
             ->method('put')
             ->with(__DIR__.'/static/html/foo/bar/index.html', 'Lorem ipsum');
+
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
+        $staticRequestCache->store($request, $response);
+    }
+
+    public function testItStoresJsonResponseAndSavesAsJsonFile()
+    {
+        $request = \Illuminate\Http\Request::create('foo/bar.json', 'GET');
+        $response = $this->getCacheablesResponse();
+        $response->header('Content-type', 'application/json');
+        $response->setContent('{foo: "bar"}');
+
+        $filesystemMock = $this->getFilesystemMock();
+        $filesystemMock
+            ->expects($this->once())
+            ->method('put')
+            ->with(__DIR__.'/static/html/foo/bar.json', '{foo: "bar"}');
 
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
