@@ -32,6 +32,19 @@ RewriteCond %{DOCUMENT_ROOT}/static/html%{REQUEST_URI}/index.html -f
 RewriteRule ^(.*)$ /static/html%{REQUEST_URI}/index.html [L]
 ```
 
+## Disabling 
+
+If you want to disable the cache for some reason (the content might be dynamic), you can use the StaticRequestCache singleton in the IoC:
+
+```php
+public function __construct(StaticRequestCache $staticRequestCache)
+    {
+        $this->staticRequestCache = $staticRequestCache;
+        $this->staticRequestCache->disable();
+    }
+```
+
+Please note that this package also checks for Cache-control headers and caches accordingly.
 
 ## Clear the files
 To clear all the files manually you can use an artisan task.
