@@ -10,19 +10,18 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
-     * @return void
+     * @param \Illuminate\Foundation\Application $app
      */
     protected function getEnvironmentSetUp($app)
     {
-        // Setup default database to use sqlite :memory:
-
-        // $app['config']->set('database.default', 'testbench');
+        $app['path.public'] = function () {
+            return __DIR__;
+        };
     }
 
     public function testEnabledConfig()
     {
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->app['config']->set('static-html-cache.enabled', true);
         $this->assertTrue($staticRequestCache->isEnabled());
     }
@@ -31,7 +30,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
     {
         $this->app['config']->set('static-html-cache.enabled', false);
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->isEnabled());
     }
 
@@ -40,7 +39,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $this->app['config']->set('static-html-cache.enabled', 'debug');
         $this->app['config']->set('app.debug', true);
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->isEnabled());
     }
 
@@ -49,7 +48,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $this->app['config']->set('static-html-cache.enabled', 'debug');
         $this->app['config']->set('app.debug', false);
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertTrue($staticRequestCache->isEnabled());
     }
 
@@ -60,7 +59,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('', 'GET');
         $response = $this->getCacheablesResponse();
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertTrue($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -69,7 +68,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('', 'GET');
         $response = $this->getCacheablesResponse();
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $staticRequestCache->disable();
 
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
@@ -82,7 +81,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
         $request->setMethod('POST');
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -93,7 +92,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
         $response = $this->getCacheablesResponse();
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -104,7 +103,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
         $response->setStatusCode(404);
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -115,7 +114,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
         $response->header('content-type', 'foo/bar');
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -126,7 +125,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
 
         $response->headers->set('Cache-control', 'no-store');
 
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
@@ -136,18 +135,13 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $response = $this->getCacheablesResponse();
         $response->setContent('Lorem ipsum');
 
-        $filesystemMock = Mockery::mock(\Illuminate\Filesystem\Filesystem::class);
-        $filesystemMock->shouldReceive('isDirectory')->once();
-        $filesystemMock->shouldReceive('makeDirectory')->once();
-        $filesystemMock->shouldReceive('put')->once()->withArgs(
-            function ($path, $content) {
-                return ends_with($path, 'static/html/foo/bar/index.html') && $content === 'Lorem ipsum';
-            }
-        );
+        $filesystemMock = $this->getFilesystemMock();
+        $filesystemMock
+            ->expects($this->once())
+            ->method('put')
+            ->with(__DIR__.'/static/html/foo/bar/index.html', 'Lorem ipsum');
 
-        app()->instance(\Illuminate\Filesystem\Filesystem::class, $filesystemMock);
-
-        $staticRequestCache = app(\Swis\LaravelStaticRequestCache\StaticRequestCache::class);
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
     }
 
@@ -158,9 +152,20 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
     {
         $response = new \Illuminate\Http\Response();
         $response->setStatusCode(200);
-        $response->header('content-type', 'text/html');
-        $response->headers->set('Cache-control', 'public');
+        $response->header('Content-Type', 'text/html');
+        $response->header('Cache-Control', 'public');
 
         return $response;
+    }
+
+    /**
+     * @return \Illuminate\Filesystem\Filesystem|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function getFilesystemMock()
+    {
+        /** @var PHPUnit\Framework\MockObject\MockObject|\Illuminate\Filesystem\Filesystem $filesystemMock */
+        return $this->getMockBuilder(\Illuminate\Filesystem\Filesystem::class)
+            ->setMethods(['isDirectory', 'makeDirectory', 'put'])
+            ->getMock();
     }
 }
