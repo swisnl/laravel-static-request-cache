@@ -29,6 +29,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Non cacheable Cache-Control values
+    |--------------------------------------------------------------------------
+    |
+    | The values for the Cache-Control header that indicate that this cache
+    | should not be enabled.
+    */
+
+    'non_cacheable_cache_control_values' => [
+        'private',
+        'no-store',
+        'no-cache',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Cacheable content types
     |--------------------------------------------------------------------------
     |
