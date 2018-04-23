@@ -68,7 +68,7 @@ $ composer test
 
 ## Security
 
-If you discover any security related issues, please email bjorn@swis.nl instead of using the issue tracker.
+If you discover any security related issues, please email security@swis.nl instead of using the issue tracker.
 
 ## Credits
 
