@@ -5,9 +5,15 @@
 
 ## Setup
 
-Add the service provider to the `config/app.php` provider array
+For Laravel 5.4 and below: Add the service provider to the `config/app.php` provider array
 ```php
-    Swis\LaravelStaticRequestCache\Provider\CacheProvider::class,,
+Swis\LaravelStaticRequestCache\Provider\CacheProvider::class,
+```
+
+Optionally, you can add the Facade to your config/app.php:
+
+```php
+'StaticRequestCache' => \Swis\LaravelStaticRequestCache\Facades\StaticRequestCache::class,
 ```
 
 Then add the middleware to the end of your `Http/Kernel.php` middleware array.
@@ -16,6 +22,7 @@ protected $middleware = [
     \Swis\LaravelStaticRequestCache\Http\Middleware\CacheMiddleware::class,
 ];
 ```
+
 
 Add the following snippet into your `.htaccess`
 ```apacheconfig
@@ -42,6 +49,12 @@ public function __construct(StaticRequestCache $staticRequestCache)
         $this->staticRequestCache = $staticRequestCache;
         $this->staticRequestCache->disable();
     }
+```
+
+Or use the Facade:
+
+```php
+	StaticRequestCache::disable();
 ```
 
 Please note that this package also checks for Cache-control headers and caches accordingly. You can change this behaviour in the config by editing `non_cacheable_cache_control_values`.
