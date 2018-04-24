@@ -7,7 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## Unreleased
 
 ### Added
-- Nothing
+- Added Facade [#3](https://github.com/swisnl/laravel-static-request-cache/pull/3) 
 
 ### Deprecated
 - Nothing
