@@ -51,7 +51,10 @@
         "laravel": {
             "providers": [
                 "Swis\\LaravelStaticRequestCache\\Provider\\CacheProvider"
-            ]
+            ],
+            "aliases": {
+                "StaticRequestCache": "Swis\\LaravelStaticRequestCache\\Facades\\StaticRequestCache"
+            }
         }
     },
     "config": {

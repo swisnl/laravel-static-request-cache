@@ -5,9 +5,15 @@
 
 ## Setup
 
-Add the service provider to the `config/app.php` provider array
+For Laravel 5.4 and below: Add the service provider to the `config/app.php` provider array
 ```php
-    Swis\LaravelStaticRequestCache\Provider\CacheProvider::class,,
+Swis\LaravelStaticRequestCache\Provider\CacheProvider::class,
+```
+
+Optionally, you can add the Facade to your config/app.php:
+
+```php
+'StaticRequestCache' => \Swis\LaravelStaticRequestCache\Facades\StaticRequestCache::class,
 ```
 
 Then add the middleware to the end of your `Http/Kernel.php` middleware array.
@@ -17,11 +23,6 @@ protected $middleware = [
 ];
 ```
 
-Optionally, you can add the Facade to your config/app.php: 
-
-```php
-    'StaticRequestCache' => \Swis\LaravelStaticRequestCache\Facades\StaticRequestCache::class,
-```
 
 Add the following snippet into your `.htaccess`
 ```apacheconfig
