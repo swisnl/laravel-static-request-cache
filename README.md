@@ -17,6 +17,12 @@ protected $middleware = [
 ];
 ```
 
+Optionally, you can add the Facade to your config/app.php: 
+
+```php
+    'StaticRequestCache' => \Swis\LaravelStaticRequestCache\Facades\StaticRequestCache::class,
+```
+
 Add the following snippet into your `.htaccess`
 ```apacheconfig
 # Rewrite to html cache if it exists and the request is off a static page
@@ -42,6 +48,12 @@ public function __construct(StaticRequestCache $staticRequestCache)
         $this->staticRequestCache = $staticRequestCache;
         $this->staticRequestCache->disable();
     }
+```
+
+Or use the Facade:
+
+```php
+	StaticRequestCache::disable();
 ```
 
 Please note that this package also checks for Cache-control headers and caches accordingly. You can change this behaviour in the config by editing `non_cacheable_cache_control_values`.
