@@ -45,16 +45,16 @@ If you want to disable the cache for some reason (the content might be dynamic),
 
 ```php
 public function __construct(StaticRequestCache $staticRequestCache)
-    {
-        $this->staticRequestCache = $staticRequestCache;
-        $this->staticRequestCache->disable();
-    }
+{
+    $this->staticRequestCache = $staticRequestCache;
+    $this->staticRequestCache->disable();
+}
 ```
 
 Or use the Facade:
 
 ```php
-	StaticRequestCache::disable();
+StaticRequestCache::disable();
 ```
 
 Please note that this package also checks for Cache-control headers and caches accordingly. You can change this behaviour in the config by editing `non_cacheable_cache_control_values`.
