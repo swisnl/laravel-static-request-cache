@@ -123,10 +123,25 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('', 'GET');
         $response = $this->getCacheablesResponse();
 
-        $response->headers->set('Cache-control', 'no-store');
+        $this->app['config']->set('static-html-cache.non_cacheable_cache_control_values', ['no-store', 'no-cache', 'private']);
+
+        $response->headers->set('Cache-Control', 'no-store');
 
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
+    }
+
+    public function testCacheableResponseHeadersAreCached()
+    {
+        $request = \Illuminate\Http\Request::create('', 'GET');
+        $response = $this->getCacheablesResponse();
+
+        $this->app['config']->set('static-html-cache.non_cacheable_cache_control_values', ['no-store, private']);
+
+        $response->headers->set('Cache-Control', 'public');
+
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
+        $this->assertTrue($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
     public function testItStoresHtmlResponseAndSavesAsIndexDotHtmlFile()

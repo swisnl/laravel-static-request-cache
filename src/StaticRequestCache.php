@@ -49,8 +49,15 @@ class StaticRequestCache
             }
         }
 
-        // check if there are Cache-control: no-store or private headers set
-        $hasDisablingCacheHeaders = ($response->headers->hasCacheControlDirective('no-store') || $response->headers->getCacheControlDirective('private'));
+        $nonCacheableCacheControlHeaders = config('static-html-cache.non_cacheable_cache_control_values', []);
+
+        $hasDisablingCacheHeaders = false;
+        foreach ($nonCacheableCacheControlHeaders as $nonCacheableCacheControlHeader) {
+            if ($response->headers->hasCacheControlDirective($nonCacheableCacheControlHeader)) {
+                $hasDisablingCacheHeaders = true;
+                break;
+            }
+        }
 
         return $this->enabled && $response->isOk() && !$hasDisablingCacheHeaders && $isGETRequest && $hasNoParams && $isCachableMimeType;
     }
