@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
+[![Made by SWIS][ico-swis]][link-swis]
 
 ## Setup
 
@@ -92,12 +93,17 @@ If you discover any security related issues, please email security@swis.nl inste
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
+## SWIS
+
+[SWIS][link-swis] is a web agency from Leiden, the Netherlands. We love working with open source software.
+
 [ico-version]: https://img.shields.io/packagist/v/swisnl/laravel-static-request-cache.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/swisnl/laravel-static-request-cache/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/swisnl/laravel-static-request-cache.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/swisnl/laravel-static-request-cache.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/swisnl/laravel-static-request-cache.svg?style=flat-square
+[ico-swis]: https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg
 
 [link-packagist]: https://packagist.org/packages/swisnl/laravel-static-request-cache
 [link-travis]: https://travis-ci.org/swisnl/laravel-static-request-cache
@@ -106,3 +112,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/swisnl/laravel-static-request-cache
 [link-author]: https://github.com/swisnl
 [link-contributors]: ../../contributors
+[link-swis]: https://www.swis.nl
