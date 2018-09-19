@@ -98,7 +98,7 @@ If you discover any security related issues, please email security@swis.nl inste
 
 ## Credits
 
-Based on [mscharl/laravel-static-html-cache](https://github.com/mscharl/laravel-static-html-cache). Added configuration for setting cachable content-type.
+Based on [mscharl/laravel-static-html-cache](https://github.com/mscharl/laravel-static-html-cache). Added configuration for setting cacheable content-type and non-cacheable cache control values.
 
 - [Björn Brala][link-author]
 - [All Contributors][link-contributors]
