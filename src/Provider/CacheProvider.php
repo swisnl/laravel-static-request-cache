@@ -3,7 +3,6 @@
 namespace Swis\LaravelStaticRequestCache\Provider;
 
 use Illuminate\Support\ServiceProvider;
-use Swis\LaravelStaticRequestCache\Classes\HtmlProxy;
 use Swis\LaravelStaticRequestCache\Commands\ClearStaticCache;
 use Swis\LaravelStaticRequestCache\StaticRequestCache;
 

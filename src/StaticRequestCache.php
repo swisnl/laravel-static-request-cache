@@ -2,22 +2,25 @@
 
 namespace Swis\LaravelStaticRequestCache;
 
-use Illuminate\Http\Request;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class StaticRequestCache
 {
     /**
-     * @var Filesystem
+     * @var \Illuminate\Filesystem\Filesystem
      */
-    private $files;
+    protected $files;
 
     /**
      * @var bool
      */
-    private $enabled;
+    protected $enabled;
 
+    /**
+     * @param \Illuminate\Filesystem\Filesystem $files
+     */
     public function __construct(Filesystem $files)
     {
         $this->files = $files;
@@ -30,11 +33,12 @@ class StaticRequestCache
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     *
      * @return bool
      */
-    public function shouldStoreResponse(Request $request, Response $response)
+    public function shouldStoreResponse(Request $request, Response $response): bool
     {
         $isGETRequest = $request->getMethod() === 'GET';
         $hasNoParams = count($request->input()) === 0;
@@ -59,10 +63,18 @@ class StaticRequestCache
             }
         }
 
-        return $this->enabled && $response->isOk() && !$hasDisablingCacheHeaders && $isGETRequest && $hasNoParams && $isCachableMimeType;
+        return $this->enabled
+            && $response->isOk()
+            && !$hasDisablingCacheHeaders
+            && $isGETRequest
+            && $hasNoParams
+            && $isCachableMimeType;
     }
+
     /**
-     * @param Request $request
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     *
      * @return mixed
      */
     private function getFilename(Request $request, Response $response)
@@ -81,9 +93,9 @@ class StaticRequestCache
     }
 
     /**
-     * @param $filename
+     * @param string $filename
      */
-    private function ensureStorageDirectory($filename)
+    private function ensureStorageDirectory(string $filename)
     {
         $path = dirname($filename);
 
@@ -93,7 +105,7 @@ class StaticRequestCache
     }
 
     /**
-     * @param Response $response
+     * @param \Symfony\Component\HttpFoundation\Response $response
      *
      * @return array
      */
@@ -102,7 +114,10 @@ class StaticRequestCache
         return explode(';', $response->headers->get('content-type'));
     }
 
-    public function isEnabled()
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
@@ -112,7 +127,11 @@ class StaticRequestCache
         $this->enabled = false;
     }
 
-    public function store($request, $response)
+    /**
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     */
+    public function store(Request $request, Response $response)
     {
         $filename = $this->getFilename($request, $response);
 

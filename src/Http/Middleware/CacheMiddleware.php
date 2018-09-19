@@ -9,8 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CacheMiddleware
 {
+    /**
+     * @var \Swis\LaravelStaticRequestCache\StaticRequestCache
+     */
     protected $staticRequestCache;
 
+    /**
+     * @param \Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache
+     */
     public function __construct(StaticRequestCache $staticRequestCache)
     {
         $this->staticRequestCache = $staticRequestCache;
@@ -28,6 +34,10 @@ class CacheMiddleware
         return $next($request);
     }
 
+    /**
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     */
     public function terminate(Request $request, Response $response)
     {
         if ($this->staticRequestCache->shouldStoreResponse($request, $response)) {
