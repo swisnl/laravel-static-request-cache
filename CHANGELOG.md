@@ -21,6 +21,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Security
 * Nothing
 
+## [0.4.0] - 2018-09-19
+
+### Added
+
+* Added Laravel 5.6 and 5.7 support [#4](https://github.com/swisnl/laravel-static-request-cache/pull/4)
+
 ## [0.3.0] - 2018-04-24
 
 ### Added
