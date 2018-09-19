@@ -70,10 +70,6 @@ php artisan static-html-cache:clear
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Credits
-
-Based on [mscharl/laravel-static-html-cache](https://github.com/mscharl/laravel-static-html-cache). Added configuration for setting cachable content-type.
-
 ## Testing
 
 ``` bash
@@ -89,6 +85,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT
 If you discover any security related issues, please email security@swis.nl instead of using the issue tracker.
 
 ## Credits
+
+Based on [mscharl/laravel-static-html-cache](https://github.com/mscharl/laravel-static-html-cache). Added configuration for setting cachable content-type.
 
 - [Björn Brala][link-author]
 - [All Contributors][link-contributors]
