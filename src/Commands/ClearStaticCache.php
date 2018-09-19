@@ -40,8 +40,6 @@ class ClearStaticCache extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
@@ -51,15 +49,15 @@ class ClearStaticCache extends Command
     }
 
     /**
-     * @param $storage_path
+     * @param string $path
      */
-    private function clearStorageDirectory($storage_path)
+    private function clearStorageDirectory(string $path)
     {
-        $storage_path = public_path($storage_path);
-        $this->comment("Clearing `{$storage_path}`…");
+        $path = public_path($path);
+        $this->comment("Clearing `{$path}`…");
 
-        if ($this->files->isDirectory($storage_path)) {
-            $this->files->deleteDirectory($storage_path, true);
+        if ($this->files->isDirectory($path)) {
+            $this->files->deleteDirectory($path, true);
         }
     }
 }
