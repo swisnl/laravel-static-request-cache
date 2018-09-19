@@ -80,6 +80,10 @@ Based on [mscharl/laravel-static-html-cache](https://github.com/mscharl/laravel-
 $ composer test
 ```
 
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
+
 ## Security
 
 If you discover any security related issues, please email security@swis.nl instead of using the issue tracker.
