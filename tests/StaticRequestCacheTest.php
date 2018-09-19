@@ -1,6 +1,8 @@
 <?php
 
-class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
+namespace Swis\LaravelStaticRequestCache\Tests;
+
+class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
@@ -195,7 +197,7 @@ class StaticRequestCacheTest extends Orchestra\Testbench\TestCase
      */
     private function getFilesystemMock()
     {
-        /** @var PHPUnit\Framework\MockObject\MockObject|\Illuminate\Filesystem\Filesystem $filesystemMock */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Illuminate\Filesystem\Filesystem $filesystemMock */
         return $this->getMockBuilder(\Illuminate\Filesystem\Filesystem::class)
             ->setMethods(['isDirectory', 'makeDirectory', 'put'])
             ->getMock();
