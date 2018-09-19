@@ -4,6 +4,14 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Made by SWIS][ico-swis]][link-swis]
 
+## Install
+
+Via Composer
+
+``` bash
+$ composer require swisnl/laravel-static-request-cache
+```
+
 ## Setup
 
 For Laravel 5.4 and below: Add the service provider to the `config/app.php` provider array
