@@ -4,6 +4,17 @@ namespace Swis\LaravelStaticRequestCache\Tests;
 
 class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 {
+    /**
+     * @var string
+     */
+    protected $publicDir;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->publicDir = __DIR__.'/_public';
+    }
+
     protected function getPackageProviders($app)
     {
         return ['Swis\LaravelStaticRequestCache\Provider\CacheProvider'];
@@ -17,7 +28,7 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['path.public'] = function () {
-            return __DIR__;
+            return $this->publicDir;
         };
 
         $app['config']->set('static-html-cache.cachable_mimetypes', ['text/html', 'application/json']);
@@ -156,7 +167,7 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
         $filesystemMock
             ->expects($this->once())
             ->method('put')
-            ->with(__DIR__.'/static/html/foo/bar/index.html', 'Lorem ipsum');
+            ->with($this->publicDir.'/static/html/foo/bar/index.html', 'Lorem ipsum');
 
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
@@ -173,7 +184,7 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
         $filesystemMock
             ->expects($this->once())
             ->method('put')
-            ->with(__DIR__.'/static/html/foo/bar.json', '{foo: "bar"}');
+            ->with($this->publicDir.'/static/html/foo/bar.json', '{foo: "bar"}');
 
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
