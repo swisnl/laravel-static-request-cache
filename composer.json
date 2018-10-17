@@ -12,8 +12,14 @@
         {
             "name": "Björn Brala",
             "email": "bjorn@swis.nl",
-            "homepage": "https://www.swis.nl/",
+            "homepage": "https://www.swis.nl/over-ons/bjorn-brala",
             "role": "Lead developer"
+        },
+        {
+            "name": "Jasper Zonneveld",
+            "email": "jasper@swis.nl",
+            "homepage": "https://www.swis.nl/over-ons/jasper-zonneveld",
+            "role": "Developer"
         }
     ],
     "require": {
