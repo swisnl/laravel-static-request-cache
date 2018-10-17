@@ -21,6 +21,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Security
 * Nothing
 
+## [0.4.1] - 2018-10-17
+
+### Changed
+
+* Prevent race condition when creating the storage directory [#5](https://github.com/swisnl/laravel-static-request-cache/pull/5)
+
 ## [0.4.0] - 2018-09-19
 
 ### Added
