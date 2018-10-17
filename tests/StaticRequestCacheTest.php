@@ -169,6 +169,10 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
             ->method('put')
             ->with($this->publicDir.'/static/html/foo/bar/index.html', 'Lorem ipsum');
 
+        $filesystemMock
+            ->method('isDirectory')
+            ->willReturn(true);
+
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
     }
@@ -185,6 +189,29 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
             ->expects($this->once())
             ->method('put')
             ->with($this->publicDir.'/static/html/foo/bar.json', '{foo: "bar"}');
+
+        $filesystemMock
+            ->method('isDirectory')
+            ->willReturn(true);
+
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
+        $staticRequestCache->store($request, $response);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testItThrowsWhenDirectoryCouldNotBeCreated()
+    {
+        $request = \Illuminate\Http\Request::create('foo/bar', 'GET');
+        $response = $this->getCacheablesResponse();
+        $response->setContent('Lorem ipsum');
+
+        $filesystemMock = $this->getFilesystemMock();
+
+        $filesystemMock
+            ->method('isDirectory')
+            ->willReturn(false);
 
         $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($filesystemMock);
         $staticRequestCache->store($request, $response);
