@@ -21,6 +21,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Security
 * Nothing
 
+## [0.5.0] - 2018-10-23
+
+### Added
+
+* Graceful mode (see config for explanation) [#6](https://github.com/swisnl/laravel-static-request-cache/pull/6)
+
 ## [0.4.1] - 2018-10-17
 
 ### Changed
