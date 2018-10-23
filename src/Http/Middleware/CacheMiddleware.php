@@ -40,8 +40,16 @@ class CacheMiddleware
      */
     public function terminate(Request $request, Response $response)
     {
-        if ($this->staticRequestCache->shouldStoreResponse($request, $response)) {
-            $this->staticRequestCache->store($request, $response);
+        $store = function () use ($request, $response) {
+            if ($this->staticRequestCache->shouldStoreResponse($request, $response)) {
+                $this->staticRequestCache->store($request, $response);
+            }
+        };
+
+        if (config('static-html-cache.graceful')) {
+            rescue($store);
+        } else {
+            $store();
         }
     }
 }
