@@ -2,6 +2,8 @@
 
 namespace Swis\LaravelStaticRequestCache\Tests;
 
+use RuntimeException;
+
 class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 {
     /**
@@ -9,7 +11,7 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
      */
     protected $publicDir;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->publicDir = __DIR__.'/_public';
@@ -198,11 +200,10 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
         $staticRequestCache->store($request, $response);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testItThrowsWhenDirectoryCouldNotBeCreated()
     {
+        $this->expectException(RuntimeException::class);
+
         $request = \Illuminate\Http\Request::create('foo/bar', 'GET');
         $response = $this->getCacheablesResponse();
         $response->setContent('Lorem ipsum');
