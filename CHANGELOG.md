@@ -7,7 +7,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## Unreleased
 
 ### Added
-* Nothing 
+* Added support for Laravel 5.8.
+
+### Changed
+* Dropped Laravel <5.5 support.
+* Dropped PHP <7.1 support.
 
 ### Deprecated
 * Nothing

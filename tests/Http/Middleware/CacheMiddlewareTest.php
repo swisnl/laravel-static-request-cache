@@ -109,11 +109,10 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $middleware->terminate($request, $response);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testItThrowsWhenNotInGracefulMode()
     {
+        $this->expectException(RuntimeException::class);
+
         $this->app['config']->set('static-html-cache.graceful', false);
 
         $request = new Request();

@@ -11,7 +11,7 @@ class ClearStaticCacheTest extends \Orchestra\Testbench\TestCase
      */
     protected $publicDir;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->publicDir = \dirname(__DIR__).'/_public';
