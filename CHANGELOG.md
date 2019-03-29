@@ -6,8 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+* Nothing
+
+## [0.6.0] - 2019-03-29
+
 ### Added
-* Added support for Laravel 5.8.
+* Added support for Laravel 5.8 [#7](https://github.com/swisnl/laravel-static-request-cache/pull/7).
 
 ### Changed
 * Dropped Laravel <5.5 support.
