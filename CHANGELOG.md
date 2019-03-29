@@ -17,18 +17,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 * Dropped Laravel <5.5 support.
 * Dropped PHP <7.1 support.
 
-### Deprecated
-* Nothing
-
-### Fixed
-* Nothing
-
-### Removed
-* Nothing
-
-### Security
-* Nothing
-
 ## [0.5.0] - 2018-10-23
 
 ### Added
