@@ -18,24 +18,12 @@ $ composer require swisnl/laravel-static-request-cache
 
 ## Setup
 
-For Laravel 5.4 and below: Add the service provider to the `config/app.php` provider array
-```php
-Swis\LaravelStaticRequestCache\Provider\CacheProvider::class,
-```
-
-Optionally, you can add the Facade to your config/app.php:
-
-```php
-'StaticRequestCache' => \Swis\LaravelStaticRequestCache\Facades\StaticRequestCache::class,
-```
-
-Then add the middleware to the end of your `Http/Kernel.php` middleware array.
+Add the middleware to the end of your `Http/Kernel.php` middleware array.
  ```php
 protected $middleware = [
     \Swis\LaravelStaticRequestCache\Http\Middleware\CacheMiddleware::class,
 ];
 ```
-
 
 Add the following snippet into your `.htaccess`
 ```apacheconfig
