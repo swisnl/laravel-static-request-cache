@@ -6,8 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+* Nothing
+
+## [0.6.1] - 2019-05-23
+
 ### Fixed
-* URLs containing `index.php` are not cached.
+* URLs containing `index.php` are not cached. [#8](https://github.com/swisnl/laravel-static-request-cache/pull/8).
 N.B. This requires a change to your `.htaccess` file for a complete fix.
 
 ## [0.6.0] - 2019-03-29
