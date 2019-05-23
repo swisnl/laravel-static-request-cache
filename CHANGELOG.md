@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
-* Nothing
+### Fixed
+* URLs containing `index.php` are not cached.
+N.B. This requires a change to your `.htaccess` file for a complete fix.
 
 ## [0.6.0] - 2019-03-29
 

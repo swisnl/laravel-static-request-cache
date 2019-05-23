@@ -4,6 +4,7 @@ namespace Swis\LaravelStaticRequestCache;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,6 +45,7 @@ class StaticRequestCache
         $isGETRequest = $request->getMethod() === 'GET';
         $hasNoParams = count($request->input()) === 0;
         $contentTypeData = $this->getContentTypeFromResponse($response);
+        $hasIndexPhpInRequestUri = Str::contains($request->getRequestUri(), 'index.php');
 
         $isCachableMimeType = false;
         foreach ($contentTypeData as $contentType) {
@@ -67,6 +69,7 @@ class StaticRequestCache
         return $this->enabled
             && $response->isOk()
             && !$hasDisablingCacheHeaders
+            && !$hasIndexPhpInRequestUri
             && $isGETRequest
             && $hasNoParams
             && $isCachableMimeType;
