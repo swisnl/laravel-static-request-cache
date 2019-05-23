@@ -27,7 +27,7 @@ protected $middleware = [
 
 Add the following snippet into your `.htaccess`
 ```apacheconfig
-# Rewrite to html cache if it exists and the request is off a static page
+# Rewrite to html cache if it exists and the request is for a static page
 # (no url query params and only get requests)
 RewriteCond %{REQUEST_METHOD} GET
 RewriteCond %{QUERY_STRING} !.*=.*
@@ -36,6 +36,7 @@ RewriteRule ^(.*)$  /static/html%{REQUEST_URI} [L]
 
 RewriteCond %{REQUEST_METHOD} GET
 RewriteCond %{QUERY_STRING} !.*=.*
+RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{DOCUMENT_ROOT}/static/html%{REQUEST_URI}/index.html -f
 RewriteRule ^(.*)$ /static/html%{REQUEST_URI}/index.html [L]
 ```

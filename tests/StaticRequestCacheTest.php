@@ -122,6 +122,15 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
         $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
     }
 
+    public function testRequestUriContainingIndexPhpIsNotCached()
+    {
+        $request = \Illuminate\Http\Request::create('index.php', 'GET');
+        $response = $this->getCacheablesResponse();
+
+        $staticRequestCache = new \Swis\LaravelStaticRequestCache\StaticRequestCache($this->getFilesystemMock());
+        $this->assertFalse($staticRequestCache->shouldStoreResponse($request, $response));
+    }
+
     public function testNonCacheableContentTypesIsNotCached()
     {
         $request = \Illuminate\Http\Request::create('', 'GET');
