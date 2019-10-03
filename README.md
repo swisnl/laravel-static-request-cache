@@ -63,8 +63,8 @@ Please note that this package also checks for Cache-control headers and caches a
 
 ## Clear the files
 To clear all the files manually you can use an artisan command.
-```bash
-php artisan static-html-cache:clear
+``` bash
+$ php artisan static-html-cache:clear
 ```
 
 ## Change log
