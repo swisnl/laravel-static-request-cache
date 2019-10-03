@@ -62,7 +62,7 @@ StaticRequestCache::disable();
 Please note that this package also checks for Cache-control headers and caches accordingly. You can change this behaviour in the config by editing `non_cacheable_cache_control_values`.
 
 ## Clear the files
-To clear all the files manually you can use an artisan task.
+To clear all the files manually you can use an artisan command.
 ```bash
 php artisan static-html-cache:clear
 ```
