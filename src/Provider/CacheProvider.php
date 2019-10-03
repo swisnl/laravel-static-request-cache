@@ -1,10 +1,10 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Provider;
+namespace Swis\Laravel\StaticRequestCache\Provider;
 
 use Illuminate\Support\ServiceProvider;
-use Swis\LaravelStaticRequestCache\Commands\ClearStaticCache;
-use Swis\LaravelStaticRequestCache\StaticRequestCache;
+use Swis\Laravel\StaticRequestCache\Commands\ClearStaticCache;
+use Swis\Laravel\StaticRequestCache\StaticRequestCache;
 
 class CacheProvider extends ServiceProvider
 {

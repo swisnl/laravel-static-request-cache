@@ -21,7 +21,7 @@ $ composer require swisnl/laravel-static-request-cache
 Add the middleware to the end of your `Http/Kernel.php` middleware array.
  ```php
 protected $middleware = [
-    \Swis\LaravelStaticRequestCache\Http\Middleware\CacheMiddleware::class,
+    \Swis\Laravel\StaticRequestCache\Http\Middleware\CacheMiddleware::class,
 ];
 ```
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache;
+namespace Swis\Laravel\StaticRequestCache;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;

@@ -1,21 +1,21 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Http\Middleware;
+namespace Swis\Laravel\StaticRequestCache\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Swis\LaravelStaticRequestCache\StaticRequestCache;
+use Swis\Laravel\StaticRequestCache\StaticRequestCache;
 use Symfony\Component\HttpFoundation\Response;
 
 class CacheMiddleware
 {
     /**
-     * @var \Swis\LaravelStaticRequestCache\StaticRequestCache
+     * @var \Swis\Laravel\StaticRequestCache\StaticRequestCache
      */
     protected $staticRequestCache;
 
     /**
-     * @param \Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache
+     * @param \Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache
      */
     public function __construct(StaticRequestCache $staticRequestCache)
     {

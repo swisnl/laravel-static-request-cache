@@ -1,18 +1,18 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Tests\Http\Middleware;
+namespace Swis\Laravel\StaticRequestCache\Tests\Http\Middleware;
 
 use Illuminate\Http\Request;
 use RuntimeException;
-use Swis\LaravelStaticRequestCache\Http\Middleware\CacheMiddleware;
-use Swis\LaravelStaticRequestCache\StaticRequestCache;
+use Swis\Laravel\StaticRequestCache\Http\Middleware\CacheMiddleware;
+use Swis\Laravel\StaticRequestCache\StaticRequestCache;
 use Symfony\Component\HttpFoundation\Response;
 
 class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
-        return ['Swis\LaravelStaticRequestCache\Provider\CacheProvider'];
+        return ['Swis\Laravel\StaticRequestCache\Provider\CacheProvider'];
     }
 
     public function testHandlesRequest()
@@ -20,7 +20,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $request = new Request();
         $response = new Response();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache */
         $staticRequestCache = $this->getMockBuilder(StaticRequestCache::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -40,7 +40,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $request = new Request();
         $response = new Response();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache */
         $staticRequestCache = $this->getMockBuilder(StaticRequestCache::class)
             ->disableOriginalConstructor()
             ->setMethods(['shouldStoreResponse', 'store'])
@@ -64,7 +64,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $request = new Request();
         $response = new Response();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache */
         $staticRequestCache = $this->getMockBuilder(StaticRequestCache::class)
             ->disableOriginalConstructor()
             ->setMethods(['shouldStoreResponse', 'store'])
@@ -89,7 +89,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $request = new Request();
         $response = new Response();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache */
         $staticRequestCache = $this->getMockBuilder(StaticRequestCache::class)
             ->disableOriginalConstructor()
             ->setMethods(['shouldStoreResponse', 'store'])
@@ -118,7 +118,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $request = new Request();
         $response = new Response();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\LaravelStaticRequestCache\StaticRequestCache $staticRequestCache */
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\Swis\Laravel\StaticRequestCache\StaticRequestCache $staticRequestCache */
         $staticRequestCache = $this->getMockBuilder(StaticRequestCache::class)
             ->disableOriginalConstructor()
             ->setMethods(['shouldStoreResponse', 'store'])

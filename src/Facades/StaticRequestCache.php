@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Facades;
+namespace Swis\Laravel\StaticRequestCache\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -13,6 +13,6 @@ class StaticRequestCache extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \Swis\LaravelStaticRequestCache\StaticRequestCache::class;
+        return \Swis\Laravel\StaticRequestCache\StaticRequestCache::class;
     }
 }

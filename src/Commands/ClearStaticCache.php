@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Commands;
+namespace Swis\Laravel\StaticRequestCache\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

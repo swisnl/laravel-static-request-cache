@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Swis\\LaravelStaticRequestCache\\": "src"
+            "Swis\\Laravel\\StaticRequestCache\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Swis\\LaravelStaticRequestCache\\Tests\\": "tests"
+            "Swis\\Laravel\\StaticRequestCache\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -57,10 +57,10 @@
         },
         "laravel": {
             "providers": [
-                "Swis\\LaravelStaticRequestCache\\Provider\\CacheProvider"
+                "Swis\\Laravel\\StaticRequestCache\\Provider\\CacheProvider"
             ],
             "aliases": {
-                "StaticRequestCache": "Swis\\LaravelStaticRequestCache\\Facades\\StaticRequestCache"
+                "StaticRequestCache": "Swis\\Laravel\\StaticRequestCache\\Facades\\StaticRequestCache"
             }
         }
     },

@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\LaravelStaticRequestCache\Tests\Commands;
+namespace Swis\Laravel\StaticRequestCache\Tests\Commands;
 
 use Illuminate\Foundation\Application;
 
@@ -19,7 +19,7 @@ class ClearStaticCacheTest extends \Orchestra\Testbench\TestCase
 
     protected function getPackageProviders($app)
     {
-        return ['Swis\LaravelStaticRequestCache\Provider\CacheProvider'];
+        return ['Swis\Laravel\StaticRequestCache\Provider\CacheProvider'];
     }
 
     /**
