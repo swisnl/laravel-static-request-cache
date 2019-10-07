@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## Unreleased
 
+* Nothing
+
+## [1.0.0] - 2019-10-07
+
 ### Changed
 * Changed namespace from `Swis\LaravelStaticRequestCache` to `Swis\Laravel\StaticRequestCache`.
 
