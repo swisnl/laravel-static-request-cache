@@ -8,6 +8,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 * Nothing
 
+## [1.1.0] - 2020-01-17
+
+### Changed
+* Replaced `RuntimeException` with custom `CacheException` [#11](https://github.com/swisnl/laravel-static-request-cache/pull/11).
+
 ## [1.0.0] - 2019-10-07
 
 ### Changed
