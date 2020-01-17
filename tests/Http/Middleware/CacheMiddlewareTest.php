@@ -3,7 +3,7 @@
 namespace Swis\Laravel\StaticRequestCache\Tests\Http\Middleware;
 
 use Illuminate\Http\Request;
-use RuntimeException;
+use Swis\Laravel\StaticRequestCache\Exceptions\CacheException;
 use Swis\Laravel\StaticRequestCache\Http\Middleware\CacheMiddleware;
 use Swis\Laravel\StaticRequestCache\StaticRequestCache;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,7 +103,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $staticRequestCache->expects($this->once())
             ->method('store')
             ->with($request, $response)
-            ->willThrowException(new RuntimeException('Directory "/test/" could not be created'));
+            ->willThrowException(new CacheException('Directory "/test/" could not be created'));
 
         $middleware = new CacheMiddleware($staticRequestCache);
         $middleware->terminate($request, $response);
@@ -111,7 +111,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
 
     public function testItThrowsWhenNotInGracefulMode()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(CacheException::class);
 
         $this->app['config']->set('static-html-cache.graceful', false);
 
@@ -132,7 +132,7 @@ class CacheMiddlewareTest extends \Orchestra\Testbench\TestCase
         $staticRequestCache->expects($this->once())
             ->method('store')
             ->with($request, $response)
-            ->willThrowException(new RuntimeException('Directory "/test/" could not be created'));
+            ->willThrowException(new CacheException('Directory "/test/" could not be created'));
 
         $middleware = new CacheMiddleware($staticRequestCache);
         $middleware->terminate($request, $response);

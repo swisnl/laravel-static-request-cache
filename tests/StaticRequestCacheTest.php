@@ -2,7 +2,7 @@
 
 namespace Swis\Laravel\StaticRequestCache\Tests;
 
-use RuntimeException;
+use Swis\Laravel\StaticRequestCache\Exceptions\CacheException;
 
 class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 {
@@ -211,7 +211,7 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 
     public function testItThrowsWhenDirectoryCouldNotBeCreated()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(CacheException::class);
 
         $request = \Illuminate\Http\Request::create('foo/bar', 'GET');
         $response = $this->getCacheablesResponse();
@@ -221,6 +221,24 @@ class StaticRequestCacheTest extends \Orchestra\Testbench\TestCase
 
         $filesystemMock
             ->method('isDirectory')
+            ->willReturn(false);
+
+        $staticRequestCache = new \Swis\Laravel\StaticRequestCache\StaticRequestCache($filesystemMock);
+        $staticRequestCache->store($request, $response);
+    }
+
+    public function testItThrowsWhenFileCouldNotBeCreated()
+    {
+        $this->expectException(CacheException::class);
+
+        $request = \Illuminate\Http\Request::create('foo/bar', 'GET');
+        $response = $this->getCacheablesResponse();
+        $response->setContent('Lorem ipsum');
+
+        $filesystemMock = $this->getFilesystemMock();
+
+        $filesystemMock
+            ->method('put')
             ->willReturn(false);
 
         $staticRequestCache = new \Swis\Laravel\StaticRequestCache\StaticRequestCache($filesystemMock);

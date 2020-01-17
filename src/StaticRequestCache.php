@@ -5,7 +5,7 @@ namespace Swis\Laravel\StaticRequestCache;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use RuntimeException;
+use Swis\Laravel\StaticRequestCache\Exceptions\CacheException;
 use Symfony\Component\HttpFoundation\Response;
 
 class StaticRequestCache
@@ -108,7 +108,7 @@ class StaticRequestCache
         $this->files->makeDirectory($path, 0777, true, true);
 
         if (!$this->files->isDirectory($path)) {
-            throw new RuntimeException(sprintf('Directory "%s" could not be created', $path));
+            throw new CacheException(sprintf('Directory "%s" could not be created', $path));
         }
     }
 
@@ -147,6 +147,8 @@ class StaticRequestCache
 
         $file = $response->getContent();
 
-        $this->files->put($filename, $file);
+        if ($this->files->put($filename, $file) === false) {
+            throw new CacheException(sprintf('File "%s" could not be created', $filename));
+        }
     }
 }
