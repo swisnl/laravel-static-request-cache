@@ -47,9 +47,11 @@ class StaticRequestCache
         $contentTypeData = $this->getContentTypeFromResponse($response);
         $hasIndexPhpInRequestUri = Str::contains($request->getRequestUri(), 'index.php');
 
+        $cachableMimeTypes = config('static-html-cache.cachable_mimetypes', []);
+
         $isCachableMimeType = false;
         foreach ($contentTypeData as $contentType) {
-            $isCachableMimeType = in_array($contentType, config('static-html-cache.cachable_mimetypes'), true) !== false;
+            $isCachableMimeType = in_array($contentType, $cachableMimeTypes, true) !== false;
 
             if ($isCachableMimeType === true) {
                 break;
