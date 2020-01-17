@@ -13,7 +13,7 @@ class CacheProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/../../config/static-html-cache.php' => config_path('static-html-cache.php'),
@@ -25,7 +25,7 @@ class CacheProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/static-html-cache.php', 'static-html-cache');
 
@@ -36,7 +36,7 @@ class CacheProvider extends ServiceProvider
         ]);
     }
 
-    public function provides()
+    public function provides(): array
     {
         return [
             'static-html-cache'

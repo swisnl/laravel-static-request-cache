@@ -38,7 +38,7 @@ class CacheMiddleware
      * @param \Illuminate\Http\Request                   $request
      * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    public function terminate(Request $request, Response $response)
+    public function terminate(Request $request, Response $response): void
     {
         $store = function () use ($request, $response) {
             if ($this->staticRequestCache->shouldStoreResponse($request, $response)) {

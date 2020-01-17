@@ -41,7 +41,7 @@ class ClearStaticCache extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->clearStorageDirectory(config('static-html-cache.cache_path_prefix'));
 
@@ -51,7 +51,7 @@ class ClearStaticCache extends Command
     /**
      * @param string $path
      */
-    private function clearStorageDirectory(string $path)
+    private function clearStorageDirectory(string $path): void
     {
         $path = public_path($path);
         $this->comment("Clearing `{$path}`…");

@@ -49,7 +49,7 @@ class StaticRequestCache
 
         $isCachableMimeType = false;
         foreach ($contentTypeData as $contentType) {
-            $isCachableMimeType = in_array($contentType, config('static-html-cache.cachable_mimetypes')) !== false;
+            $isCachableMimeType = in_array($contentType, config('static-html-cache.cachable_mimetypes'), true) !== false;
 
             if ($isCachableMimeType === true) {
                 break;
@@ -79,9 +79,9 @@ class StaticRequestCache
      * @param \Illuminate\Http\Request                   $request
      * @param \Symfony\Component\HttpFoundation\Response $response
      *
-     * @return mixed
+     * @return string
      */
-    private function getFilename(Request $request, Response $response)
+    private function getFilename(Request $request, Response $response): string
     {
         $request_uri = trim($request->getRequestUri(), '/');
         $request_uri = empty($request_uri) ? '' : '/'.$request_uri;
@@ -99,7 +99,7 @@ class StaticRequestCache
     /**
      * @param string $filename
      */
-    private function ensureStorageDirectory(string $filename)
+    private function ensureStorageDirectory(string $filename): void
     {
         $path = $this->files->dirname($filename);
 
@@ -128,7 +128,7 @@ class StaticRequestCache
         return $this->enabled;
     }
 
-    public function disable()
+    public function disable(): void
     {
         $this->enabled = false;
     }
@@ -137,7 +137,7 @@ class StaticRequestCache
      * @param \Illuminate\Http\Request                   $request
      * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    public function store(Request $request, Response $response)
+    public function store(Request $request, Response $response): void
     {
         $filename = $this->getFilename($request, $response);
 
