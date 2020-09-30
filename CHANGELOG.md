@@ -8,6 +8,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 * Nothing
 
+## [1.3.0] - 2020-09-30
+
+### Added
+* Added support for Laravel 8 [#13](https://github.com/swisnl/laravel-static-request-cache/pull/13).
+
 ## [1.2.0] - 2020-03-06
 
 ### Added
