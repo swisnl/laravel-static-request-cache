@@ -111,7 +111,7 @@ This package is [Treeware](https://treeware.earth). If you use it in production,
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/swisnl/laravel-static-request-cache.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/swisnl/laravel-static-request-cache.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/swisnl/laravel-static-request-cache.svg?style=flat-square
-[ico-swis]: https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%23D9021B.svg?style=flat-square
+[ico-swis]: https://img.shields.io/badge/%F0%9F%9A%80-made%20by%20SWIS-%230737A9.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/swisnl/laravel-static-request-cache
 [link-travis]: https://travis-ci.org/swisnl/laravel-static-request-cache
