@@ -4,7 +4,11 @@ All notable changes to `swisnl/laravel-static-request-cache` will be documented 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## Unreleased
+## [Unreleased]
+
+* Nothing
+
+## [1.4.0] - 2022-02-08
 
 ### Added
 * Added support for Laravel 9.
