@@ -9,6 +9,10 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Made by SWIS][ico-swis]][link-swis]
 
+🚨 **THIS PACKAGE HAS BEEN ABANDONED** 🚨
+
+We don't use this package anymore in our own projects — we switched to Nginx with FastCGI Caching — and cannot justify the time needed to maintain it anymore. That's why we have chosen to abandon it. Feel free to fork our code and maintain your own copy or use one of the many alternatives. We suggest using [silber/page-cache](https://github.com/JosephSilber/page-cache) instead as it is fairly similar.
+
 ## Install
 
 Via Composer
